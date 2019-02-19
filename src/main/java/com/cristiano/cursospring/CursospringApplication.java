@@ -83,7 +83,7 @@ public class CursospringApplication implements CommandLineRunner {
 		  cli1.getEndereco().addAll(Arrays.asList(e1, e2));
 		  
 		  clienteRepository.saveAll(Arrays.asList(cli1));
-		  enderecoRepository.saveAll(Arrays.asList(e1));
+		  enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		  
 		 		
 	}
