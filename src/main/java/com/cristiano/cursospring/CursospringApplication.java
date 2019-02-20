@@ -13,6 +13,7 @@ import com.cristiano.cursospring.domain.Cidade;
 import com.cristiano.cursospring.domain.Cliente;
 import com.cristiano.cursospring.domain.Endereco;
 import com.cristiano.cursospring.domain.Estado;
+import com.cristiano.cursospring.domain.ItemPedido;
 import com.cristiano.cursospring.domain.Pagamento;
 import com.cristiano.cursospring.domain.PagamentoComBoleto;
 import com.cristiano.cursospring.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.cristiano.cursospring.repositories.CidadeRepository;
 import com.cristiano.cursospring.repositories.ClienteRepository;
 import com.cristiano.cursospring.repositories.EnderecoRepository;
 import com.cristiano.cursospring.repositories.EstadoRepository;
+import com.cristiano.cursospring.repositories.ItemPedidoRepository;
 import com.cristiano.cursospring.repositories.PagamentoRepository;
 import com.cristiano.cursospring.repositories.PedidoRepository;
 import com.cristiano.cursospring.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class CursospringApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursospringApplication.class, args);
@@ -113,6 +117,18 @@ public class CursospringApplication implements CommandLineRunner {
 		  pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		  pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
 		 		
+		  ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		  ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		  ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+
+		  ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		  ped2.getItens().addAll(Arrays.asList(ip3));
+		 
+		  p1.getItens().addAll(Arrays.asList(ip1));
+		  p2.getItens().addAll(Arrays.asList(ip2));
+		  p3.getItens().addAll(Arrays.asList(ip3));
+		  
+		  itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 	
